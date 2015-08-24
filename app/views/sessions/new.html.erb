@@ -1,0 +1,12 @@
+<h2>Welcome to Facebook</h2>
+<%= form_for :session , url: sessions_path do |f| %>
+
+<%= f.label :Email %>
+<%= f.text_field :email_id %>
+
+<%= f.label :Password%>
+<%= f.password_field :password %>
+
+<%= f.submit :logIn%>
+<% end %>
+<%= link_to 'SignUp' , new_user_path %>

@@ -1,0 +1,10 @@
+<% if logged_in? -%>
+    Welcome, 
+    <%= link_to current_user.email_id , users_path %>
+    <%= link_to 'Logout', session_path(current_user) , method: :delete , data: {confirm: "Are you sure?"} %>
+<% end %>
+
+<h2>What is in your mind.</h2>
+<h2>Posts</h2>
+
+<h1>Coming Soon</h1>
