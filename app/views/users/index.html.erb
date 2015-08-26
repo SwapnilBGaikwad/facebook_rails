@@ -5,6 +5,56 @@
 <% end %>
 
 <h2>What is in your mind.</h2>
+<%= form_for([@user, @user.posts.build]) do |f|%>
+<p>
+    <%= f.label :body %>
+    <%= f.text_field :body %>
+    <%= f.submit %>
+</p>
+<%  end  %>
+
+
+
 <h2>Posts</h2>
 
 <h1>Coming Soon</h1>
+
+
+<table>                         
+  <tr>                          
+    <th>Posts 
+        <h2>COUNT <%=  @posts.count  %></h2>
+    </th>
+  </tr>
+<% @posts.each do |post| %>      
+  <tr>
+    <td>Post By : <%= User.find_by_id(post.user_id).first_name %></td>
+  </tr>
+  <tr>
+      <td>Post body <%= post.body %></td>
+  </tr>
+  <tr>
+    <td>
+        <%= link_to 'Destroy', user_post_path(@user , post)  , method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
+    <td>
+      <%= link_to "Edit", edit_user_post_path(@user , post)  %>
+    </td>
+  </tr>
+  
+<% end %>            
+</table>
+
+<h2>List Of Friends</h2>
+
+<table>                         
+  <tr>                          
+    <th>First_name</th>
+  </tr>
+<% @friends.each do |friend| %>      
+  <tr>
+    <td><%= friend.first_name %></td>
+      <td>Hello World</td>
+  </tr>
+<% end %>                       
+</table>
