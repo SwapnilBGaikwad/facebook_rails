@@ -46,10 +46,11 @@
 
     <td>
       <% @post_comments = @comments.where('post_id = ? ' , post.id) %>
-      <p>Comment Count : <%= @post_comments.count %> </p>
+      <p>Comments Count : <%= @post_comments.count %> </p>
       <br>
       <% @post_comments.each do |f|  %>
-      <%= User.find_by_id(f.user_id).first_name %>
+      <% @tmp_user = User.find_by_id(f.user_id) %>
+      <%= link_to  @tmp_user.first_name, user_path(@tmp_user)%>
       <br>
       <%= f.body %>
       <br>
@@ -86,3 +87,4 @@
 </table>
 
 </body>
+</html>

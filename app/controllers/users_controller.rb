@@ -31,6 +31,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def show
+    @user = User.find_by_id(params[:id])
+  end
+  
   
   private
   
@@ -38,4 +42,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:first_name , :email_id , :password , :mobile_number , :college)
   end
 
+  def show_params
+    params.require(:user).permit(:id)
+  end
 end
