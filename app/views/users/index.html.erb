@@ -1,3 +1,6 @@
+<title>Home</title>
+</head>
+<body>
 <% if logged_in? -%>
     Welcome, 
     <%= link_to current_user.email_id , users_path %>
@@ -14,19 +17,14 @@
 <%  end  %>
 
 
-
-<h2>Posts</h2>
-
-<h1>Coming Soon</h1>
-
-
 <table>                         
   <tr>                          
     <th>Posts 
         <h2>COUNT <%=  @posts.count  %></h2>
     </th>
   </tr>
-<% @posts.each do |post| %>      
+<% @posts.each do |post| %> 
+  
   <tr>
     <td>Post By : <%= User.find_by_id(post.user_id).first_name %></td>
   </tr>
@@ -34,16 +32,45 @@
       <td>Post body <%= post.body %></td>
   </tr>
   <tr>
+    <% if post.user_id == session[:user_id] %>
     <td>
         <%= link_to 'Destroy', user_post_path(@user , post)  , method: :delete, data: { confirm: 'Are you sure?' } %>
     </td>
     <td>
       <%= link_to "Edit", edit_user_post_path(@user , post)  %>
     </td>
+        
+    <% end %>
   </tr>
-  
-<% end %>            
+  <tr>
+
+    <td>
+      <% @post_comments = @comments.where('post_id = ? ' , post.id) %>
+      <p>Comment Count : <%= @post_comments.count %> </p>
+      <br>
+      <% @post_comments.each do |f|  %>
+      <%= User.find_by_id(f.user_id).first_name %>
+      <br>
+      <%= f.body %>
+      <br>
+      <%  end  %>
+    </td>
+  </tr>
+  <tr>
+        <td>
+          <%= form_for([post, post.comments.build]) do |f|%>
+                <p>
+                    <%= f.label 'your Comment' %>
+                    <br>
+                    <%= f.text_field :body %>
+                    <%= f.submit :Comment %>
+                </p>
+            <%  end  %>
+        </td>
+  </tr>
+<% end %>      
 </table>
+
 
 <h2>List Of Friends</h2>
 
@@ -54,7 +81,8 @@
 <% @friends.each do |friend| %>      
   <tr>
     <td><%= friend.first_name %></td>
-      <td>Hello World</td>
   </tr>
 <% end %>                       
 </table>
+
+</body>

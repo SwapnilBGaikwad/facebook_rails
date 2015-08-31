@@ -9,6 +9,7 @@ class UsersController < ApplicationController
       @friends = User.where('id IN (?) OR id IN (?)',@user_ids,@friend_ids).select('first_name')
       @posts = Post.where('user_id IN (? , ?)' , @friends.ids , @user.id)
       @count = @posts.count
+      @comments = Comment.where('post_id IN (?)' , @posts.ids)
     else
       redirect_to root_path
     end

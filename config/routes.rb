@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'comments/new'
+
   get 'posts/new'
 
   root 'sessions#new'
@@ -8,6 +10,10 @@ Rails.application.routes.draw do
   
   resources :users do
     resources :posts
+  end
+  
+  resources :posts do 
+      resources :comments
   end
   
   # The priority is based upon order of creation: first created -> highest priority.
