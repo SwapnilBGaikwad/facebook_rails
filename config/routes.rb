@@ -12,6 +12,13 @@ Rails.application.routes.draw do
     resources :posts
   end
   
+  resources :users do
+    member do 
+        post 'add_friend'
+        get 'search_friend'
+    end
+  end
+  
   resources :posts do 
       resources :comments
   end

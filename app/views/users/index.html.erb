@@ -7,6 +7,16 @@
     <%= link_to 'Logout', session_path(current_user) , method: :delete , data: {confirm: "Are you sure?"} %>
 <% end %>
 
+
+<%= form_for( @search_user, :url => search_friend_user_path( @search_user ), :html => { :method => :get } ) do |f| %>
+ <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+
+
 <h2>What is in your mind.</h2>
 <%= form_for([@user, @user.posts.build]) do |f|%>
 <p>

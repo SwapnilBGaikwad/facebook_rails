@@ -1,0 +1,4 @@
+<% @searched_friends.each do |f| %>
+<%= link_to f.first_name , user_path(f.id) %>
+<br>
+<%  end  %>

@@ -2,6 +2,17 @@
 </head>
 
 <body>
+    <p><%=  params[:id]  %></p><br>
+    
+    <% if @is_friend == false %>
+    
+        <%= form_for( @user, :url => add_friend_user_path( @user ), :html => { :method => :post } ) do |f| %>
+        <p>Add to Friend Circle.</p>
+        <%= f.submit "Add to Circle." %>
+        <% end %>
+    <% end %>
+    
+    
     <table>
         <tr>
             <th>
